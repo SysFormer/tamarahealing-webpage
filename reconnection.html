@@ -198,11 +198,9 @@
 </div>
 <script>
 (function () {
-    var last = parseInt(localStorage.getItem('promoDismissed') || '0', 10);
-    if (!last || Date.now() - last > 86400000) document.documentElement.setAttribute('data-promo', 'on');
+    document.documentElement.setAttribute('data-promo', 'on');
 })();
 function dismissPromo() {
-    localStorage.setItem('promoDismissed', String(Date.now()));
     document.documentElement.removeAttribute('data-promo');
 }
 </script>
