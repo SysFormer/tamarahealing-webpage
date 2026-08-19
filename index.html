@@ -16,6 +16,29 @@
             --heading: 'Cormorant Garamond', Georgia, serif;
             --body: 'Nunito Sans', 'Segoe UI', sans-serif;
         }
+
+        /* --- Pasek ogloszeniowy (pobyt w Warszawie) --- */
+        :root { --promo-h: 46px; }
+        .promo-bar { display: none; }
+        html[data-promo="on"] .promo-bar { display: block; position: fixed; top: 0; left: 0; right: 0; z-index: 120; background: var(--plum); border-bottom: 1px solid rgba(200,150,62,.35); }
+        html[data-promo="on"] nav { top: var(--promo-h); }
+        .promo-inner { max-width: 1200px; margin: 0 auto; min-height: var(--promo-h); padding: .5rem 3rem .5rem 1.5rem; display: flex; align-items: center; justify-content: center; gap: .6rem; flex-wrap: wrap; position: relative; }
+        .promo-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); flex: none; }
+        .promo-bar .promo-text, .promo-bar .promo-dates, .promo-bar .promo-note, .promo-bar .promo-sep { font-family: var(--body); font-size: .82rem; color: rgba(255,248,238,.9); letter-spacing: .01em; }
+        .promo-bar .promo-dates { font-weight: 600; color: var(--cream); }
+        .promo-bar .promo-note { color: rgba(255,248,238,.6); }
+        .promo-bar .promo-sep { color: rgba(255,248,238,.35); }
+        .promo-btn { font-family: var(--body); font-size: .7rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--cream); text-decoration: none; border: 1px solid rgba(200,150,62,.6); border-radius: 999px; padding: .45rem 1.1rem; margin-left: .4rem; transition: background .3s, border-color .3s; }
+        .promo-btn:hover { background: var(--gold); border-color: var(--gold); color: var(--plum); }
+        .promo-close { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); background: none; border: none; color: rgba(255,248,238,.5); font-size: 1.2rem; line-height: 1; cursor: pointer; padding: .25rem .4rem; transition: color .3s; }
+        .promo-close:hover { color: var(--cream); }
+        @media (max-width: 768px) {
+            :root { --promo-h: 64px; }
+            .promo-inner { padding: .55rem 2.5rem .55rem 1rem; gap: .35rem .5rem; }
+            .promo-bar .promo-text, .promo-bar .promo-dates, .promo-bar .promo-note { font-size: .74rem; }
+            .promo-bar .promo-sep, .promo-bar .promo-note { display: none; }
+            .promo-btn { font-size: .62rem; padding: .38rem .85rem; }
+        }
         html { scroll-behavior: smooth; }
         body { font-family: var(--body); color: var(--text); background: var(--off-white); line-height: 1.7; overflow-x: hidden; }
 
@@ -198,6 +221,29 @@
     </style>
 </head>
 <body>
+
+<!-- Pasek ogloszeniowy: pobyt w Warszawie -->
+<div class="promo-bar" role="region" aria-label="Ogloszenie">
+    <div class="promo-inner">
+        <span class="promo-dot" aria-hidden="true"></span>
+        <span class="promo-text" data-i18n="promoText">Tamara przyjmuje w Warszawie</span>
+        <span class="promo-dates" data-i18n="promoDates">20 listopada &ndash; 6 grudnia 2026</span>
+        <span class="promo-sep" aria-hidden="true">&middot;</span>
+        <span class="promo-note" data-i18n="promoSlots">ograniczona liczba miejsc</span>
+        <a class="promo-btn" href="#kontakt" data-i18n="promoBtn">Um&oacute;w sesj&#281;</a>
+        <button class="promo-close" onclick="dismissPromo()" aria-label="Zamknij">&times;</button>
+    </div>
+</div>
+<script>
+(function () {
+    var last = parseInt(localStorage.getItem('promoDismissed') || '0', 10);
+    if (!last || Date.now() - last > 86400000) document.documentElement.setAttribute('data-promo', 'on');
+})();
+function dismissPromo() {
+    localStorage.setItem('promoDismissed', String(Date.now()));
+    document.documentElement.removeAttribute('data-promo');
+}
+</script>
 
 
 <nav id="nav">
@@ -448,6 +494,7 @@
 // ═══════ TRANSLATIONS ═══════
 const T = {
 pl: {
+    promoText:'Tamara przyjmuje w Warszawie', promoDates:'20 listopada \u2013 6 grudnia 2026', promoSlots:'ograniczona liczba miejsc', promoBtn:'Um\u00f3w sesj\u0119',
     navAbout:'O mnie', navServices:'Usługi', navTestimonials:'Opinie', navContact:'Kontakt',
     heroTitle:'Uzdrawianie Ciała,<br>Umysłu i Duszy', heroSub:'Holistyczne podejście do zdrowia i harmonii wewnętrznej', heroCta:'Umów wizytę',
     aboutLabel:'O mnie',
@@ -513,6 +560,7 @@ pl: {
     footColGallery:'Galeria i CV', footColServices:'Usługi', footColLegal:'Informacje prawne'
 },
 en: {
+    promoText:'Tamara is seeing clients in Warsaw', promoDates:'20 November \u2013 6 December 2026', promoSlots:'limited number of slots', promoBtn:'Book a session',
     navAbout:'About', navServices:'Services', navTestimonials:'Testimonials', navContact:'Contact',
     heroTitle:'Healing Body,<br>Mind & Soul', heroSub:'A holistic approach to health and inner harmony', heroCta:'Book a session',
     aboutLabel:'About me',
