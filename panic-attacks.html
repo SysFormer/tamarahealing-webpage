@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="pl" class="lang-pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Praca z Atakami Paniki — Body Mind Healing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --gold: #C8963E; --amber: #D4A855; --violet: #7B6D8E; --plum: #4A3B5C;
+            --cream: #FFF8EE; --off-white: #FFFDF9; --text: #3A2E2A; --text-sec: #6B5D56;
+            --heading: 'Cormorant Garamond', Georgia, serif;
+            --body: 'Nunito Sans', 'Segoe UI', sans-serif;
+        }
+
+        /* --- Pasek ogloszeniowy (pobyt w Warszawie) --- */
+        :root { --promo-h: 54px; }
+        .promo-bar { display: none; }
+        html[data-promo="on"] .promo-bar { display: block; position: fixed; top: 0; left: 0; right: 0; z-index: 120; background: #D4AF37; border-bottom: 1px solid rgba(74,59,92,.25); }
+        html[data-promo="on"] nav { top: var(--promo-h); }
+        .promo-inner { max-width: 1200px; margin: 0 auto; min-height: var(--promo-h); padding: .5rem 3rem .5rem 1.5rem; display: flex; align-items: center; justify-content: center; gap: .6rem; flex-wrap: wrap; position: relative; }
+        .promo-dot { width: 7px; height: 7px; border-radius: 50%; background: #000; flex: none; }
+        .promo-bar .promo-text, .promo-bar .promo-dates, .promo-bar .promo-note, .promo-bar .promo-sep { font-family: var(--body); font-size: .96rem; color: rgba(0,0,0,.85); letter-spacing: .01em; }
+        .promo-bar .promo-dates { font-weight: 600; color: #000; }
+        .promo-bar .promo-note { color: rgba(0,0,0,.6); }
+        .promo-bar .promo-sep { color: rgba(0,0,0,.35); }
+        .promo-btn { font-family: var(--body); font-size: .82rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: #000; text-decoration: none; border: 1px solid rgba(0,0,0,.5); border-radius: 999px; padding: .45rem 1.1rem; margin-left: .4rem; transition: background .3s, border-color .3s, color .3s; }
+        .promo-btn:hover { background: #000; border-color: #000; color: #fff; }
+        .promo-close { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); background: none; border: none; color: rgba(0,0,0,.55); font-size: 1.2rem; line-height: 1; cursor: pointer; padding: .25rem .4rem; transition: color .3s; }
+        .promo-close:hover { color: #000; }
+        @media (max-width: 768px) {
+            :root { --promo-h: 72px; }
+            .promo-inner { padding: .55rem 2.5rem .55rem 1rem; gap: .35rem .5rem; }
+            .promo-bar .promo-text, .promo-bar .promo-dates, .promo-bar .promo-note { font-size: .86rem; }
+            .promo-bar .promo-sep, .promo-bar .promo-note { display: none; }
+            .promo-btn { font-size: .74rem; padding: .4rem .9rem; }
+        }
+        /* --- Floating CTA (Warszawa) --- */
+        .float-cta-wrap { position: fixed; right: 1.5rem; bottom: 1.5rem; z-index: 110; width: 300px; max-width: calc(100vw - 2rem); opacity: 0; transform: translateY(20px) scale(.96); pointer-events: none; transition: opacity .4s cubic-bezier(.22,1,.36,1), transform .4s cubic-bezier(.22,1,.36,1); }
+        .float-cta-wrap.visible { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+        .float-cta-card { position: relative; background: var(--cream); border: 1px solid rgba(74,59,92,.12); border-radius: 18px; padding: 1.5rem 1.5rem 1.3rem; box-shadow: 0 16px 44px rgba(0,0,0,.22); }
+        .float-cta-close { position: absolute; top: .7rem; right: .7rem; width: 26px; height: 26px; border-radius: 50%; background: none; border: none; color: var(--text-sec); font-size: 1.1rem; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .3s, color .3s; }
+        .float-cta-close:hover { background: rgba(74,59,92,.08); color: var(--plum); }
+        .float-cta-title { font-family: var(--heading); font-size: 1.35rem; font-weight: 600; color: var(--plum); line-height: 1.25; margin-bottom: .5rem; padding-right: 1.3rem; }
+        .float-cta-desc { font-family: var(--body); font-size: .85rem; color: var(--text-sec); line-height: 1.55; margin-bottom: 1.2rem; }
+        .float-cta-btn { display: block; width: 100%; text-align: center; box-sizing: border-box; font-family: var(--body); font-size: .78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #000; background: #D4AF37; border-radius: 999px; padding: .85rem 1rem; text-decoration: none; transition: background .3s, color .3s, transform .3s; }
+        .float-cta-btn:hover { background: var(--plum); color: var(--cream); transform: translateY(-2px); }
+        @media (max-width: 640px) {
+            .float-cta-wrap { left: 1rem; right: 1rem; bottom: 1rem; width: auto; }
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--body); color: var(--text); background: var(--off-white); line-height: 1.7; overflow-x: hidden; }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ── Nav ── */
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(74,59,92,.97); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 2px 30px rgba(0,0,0,.2); border-bottom: 1px solid transparent; transition: background .5s, box-shadow .4s; }
+        .nav-inner { max-width: 1200px; margin: 0 auto; padding: .9rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { height: 38px; border-radius: 4px; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+        .nav-links a { font-size: .8rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,248,238,.7); text-decoration: none; transition: color .3s; }
+        .nav-links a:hover { color: var(--gold); }
+        .lang-switch { display: flex; gap: 0; border: 1px solid rgba(200,150,62,.35); margin-left: .5rem; }
+        .lang-btn { padding: .35rem .7rem; font-size: .7rem; font-weight: 700; letter-spacing: .08em; background: transparent; color: rgba(255,248,238,.7); border: none; cursor: pointer; transition: all .3s; font-family: var(--body); }
+        .lang-btn.active { background: var(--gold); color: var(--off-white); }
+        .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: .5rem; }
+        .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--cream); margin: 4px 0; transition: all .3s; }
+
+        /* ── Hero ── */
+        .hero { min-height: 55vh; display: flex; align-items: flex-end; justify-content: flex-start; position: relative; overflow: hidden; }
+        .hero-bg { position: absolute; inset: 0; background: url('assets/testimonial-bg.png') center/cover; }
+        .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(74,59,92,.88) 0%, rgba(74,59,92,.65) 40%, rgba(74,59,92,.5) 70%, rgba(74,59,92,.8) 100%); }
+        .hero-content { position: relative; z-index: 2; padding: 8rem 3rem 4rem; max-width: 800px; }
+        .hero-breadcrumb { font-size: .78rem; color: rgba(255,248,238,.5); margin-bottom: 1.5rem; }
+        .hero-breadcrumb a { color: rgba(255,248,238,.6); text-decoration: none; transition: color .3s; }
+        .hero-breadcrumb a:hover { color: var(--gold); }
+        .hero h1 { font-family: var(--heading); font-size: clamp(2.4rem,5vw,3.8rem); font-weight: 500; line-height: 1.1; color: var(--cream); margin-bottom: 1rem; opacity: 0; animation: fadeUp .9s .3s cubic-bezier(.22,1,.36,1) forwards; }
+        .hero p { font-size: 1.1rem; color: rgba(255,248,238,.7); font-weight: 300; max-width: 600px; opacity: 0; animation: fadeUp .9s .5s cubic-bezier(.22,1,.36,1) forwards; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ── Sections ── */
+        .section-label { font-size: .72rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: .8rem; }
+        .section-title { font-family: var(--heading); font-size: clamp(1.8rem,3vw,2.6rem); font-weight: 500; line-height: 1.2; margin-bottom: 1.2rem; }
+        .section-divider { width: 36px; height: 1px; background: var(--gold); margin-bottom: 2.5rem; }
+
+        /* ── Intro (Dark) ── */
+        .intro-section { background: var(--plum); padding: 5rem 2rem; position: relative; overflow: hidden; }
+        .intro-texture { position: absolute; inset: 0; background: url('assets/texture.png') center/400px repeat; opacity: .06; }
+        .intro-inner { max-width: 800px; margin: 0 auto; position: relative; z-index: 2; }
+        .intro-inner .section-title { color: var(--cream); }
+        .intro-inner p { font-size: 1rem; color: rgba(255,248,238,.7); line-height: 1.85; margin-bottom: 1.2rem; }
+
+        /* ── Detail sections (Light) ── */
+        .detail-section { background: var(--off-white); padding: 5rem 2rem; }
+        .detail-inner { max-width: 800px; margin: 0 auto; }
+        .detail-inner .section-title { color: var(--plum); }
+        .detail-inner p { font-size: 1rem; color: var(--text-sec); line-height: 1.85; margin-bottom: 1rem; }
+
+        /* ── Physiological Detail (Dark) ── */
+        .physio-section { background: var(--plum); padding: 5rem 2rem; position: relative; overflow: hidden; }
+        .physio-texture { position: absolute; inset: 0; background: url('assets/texture.png') center/400px repeat; opacity: .06; }
+        .physio-inner { max-width: 800px; margin: 0 auto; position: relative; z-index: 2; }
+        .physio-inner .section-title { color: var(--cream); }
+        .physio-inner p { font-size: 1rem; color: rgba(255,248,238,.7); line-height: 1.85; margin-bottom: 1rem; }
+
+        /* ── Example (Light) ── */
+        .example-section { background: var(--off-white); padding: 5rem 2rem; }
+        .example-inner { max-width: 800px; margin: 0 auto; }
+        .example-inner .section-title { color: var(--plum); }
+        .example-inner p { font-size: 1rem; color: var(--text-sec); line-height: 1.85; margin-bottom: 1rem; }
+        .example-inner p.note { font-size: .92rem; color: var(--text-sec); font-style: italic; opacity: .85; }
+
+        /* ── Photo section ── */
+        .photo-feature { width: 100%; position: relative; overflow: hidden; }
+        .photo-feature img { width: 100%; max-height: 450px; object-fit: cover; object-position: center 20%; display: block; }
+        .photo-feature-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(74,59,92,.3) 0%, rgba(74,59,92,.6) 100%); }
+
+        /* ── CTA ── */
+        .cta-section { background: var(--plum); padding: 5rem 2rem; text-align: center; position: relative; overflow: hidden; }
+        .cta-texture { position: absolute; inset: 0; background: url('assets/texture.png') center/400px repeat; opacity: .04; }
+        .cta-inner { position: relative; z-index: 2; max-width: 640px; margin: 0 auto; }
+        .cta-inner .section-title { color: var(--cream); margin-bottom: 1.5rem; }
+        .cta-inner p { color: rgba(255,248,238,.6); margin-bottom: 2rem; line-height: 1.75; }
+        .cta-btn { display: inline-flex; align-items: center; gap: .8rem; font-family: var(--body); font-size: .82rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--plum); background: var(--gold); border: 1px solid var(--gold); padding: .95rem 2.5rem; cursor: pointer; text-decoration: none; transition: all .4s cubic-bezier(.22,1,.36,1); }
+        .cta-btn:hover { background: var(--cream); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.2); }
+        .cta-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform .3s; }
+        .cta-btn:hover svg { transform: translateX(4px); }
+
+        /* ── Footer ── */
+        footer { padding: 3rem 2rem 2rem; background: var(--plum); border-top: 1px solid rgba(200,150,62,.1); }
+        .footer-columns { max-width: 900px; margin: 0 auto 2rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .footer-col { display: flex; flex-direction: column; gap: .5rem; }
+        .footer-col-title { font-size: .68rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--gold); margin-bottom: .3rem; }
+        .footer-col a { font-size: .82rem; color: rgba(255,248,238,.55); text-decoration: none; transition: color .3s; }
+        .footer-col a:hover { color: var(--gold); }
+        .footer-bottom { text-align: center; font-size: .75rem; color: rgba(255,248,238,.35); padding-top: 1.5rem; border-top: 1px solid rgba(200,150,62,.08); }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-toggle { display: block; }
+            .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(74,59,92,.98); padding: 1.5rem 2rem; gap: 1.2rem; border-bottom: 1px solid rgba(200,150,62,.15); }
+            .hero-content { padding: 7rem 1.5rem 3rem; }
+            .intro-section, .physio-section, .detail-section, .example-section, .cta-section { padding: 3.5rem 1.5rem; }
+            .footer-columns { grid-template-columns: 1fr; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Pasek ogloszeniowy: pobyt w Warszawie -->
+<div class="promo-bar" role="region" aria-label="Ogloszenie">
+    <div class="promo-inner">
+        <span class="promo-dot" aria-hidden="true"></span>
+        <span class="promo-text" data-i18n="promoText">Tamara przyjmuje w Warszawie</span>
+        <span class="promo-dates" data-i18n="promoDates">20 listopada &ndash; 6 grudnia 2026</span>
+        <span class="promo-sep" aria-hidden="true">&middot;</span>
+        <span class="promo-note" data-i18n="promoSlots">ograniczona liczba miejsc</span>
+        <a class="promo-btn" href="index.html#kontakt" data-i18n="promoBtn">Um&oacute;w wizyt&#281;</a>
+        <button class="promo-close" onclick="dismissPromo()" aria-label="Zamknij">&times;</button>
+    </div>
+</div>
+<script>
+(function () {
+    document.documentElement.setAttribute('data-promo', 'on');
+})();
+function dismissPromo() {
+    document.documentElement.removeAttribute('data-promo');
+}
+</script>
+
+<!-- Floating CTA: Warszawa -->
+<div class="float-cta-wrap" id="floatCtaWrap">
+    <div class="float-cta-card">
+        <button class="float-cta-close" onclick="dismissFloatCta()" aria-label="Zamknij">&times;</button>
+        <div class="float-cta-title" data-i18n="floatTitle">Wizyta w Warszawie</div>
+        <div class="float-cta-desc" data-i18n="floatDesc">20 listopada &ndash; 6 grudnia 2026 &middot; ograniczona liczba miejsc</div>
+        <a class="float-cta-btn" href="index.html#kontakt" data-i18n="floatBtn">Um&oacute;w wizyt&#281;</a>
+    </div>
+</div>
+<script>
+(function () {
+    var el = document.getElementById('floatCtaWrap');
+    if (sessionStorage.getItem('floatCtaDismissed')) return;
+    window.addEventListener('scroll', function () {
+        if (window.scrollY > 400) el.classList.add('visible');
+        else el.classList.remove('visible');
+    });
+})();
+function dismissFloatCta() {
+    sessionStorage.setItem('floatCtaDismissed', '1');
+    document.getElementById('floatCtaWrap').classList.remove('visible');
+}
+</script>
+
+<nav id="nav">
+    <div class="nav-inner">
+        <a href="index.html"><img src="assets/logo.png" alt="Body Mind Healing" class="nav-logo"></a>
+        <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+        <ul class="nav-links">
+            <li><a href="index.html#o-mnie" data-i18n="navAbout">O mnie</a></li>
+            <li><a href="index.html#uslugi" data-i18n="navServices">Us&#322;ugi</a></li>
+            <li><a href="index.html#opinie" data-i18n="navTestimonials">Opinie</a></li>
+            <li><a href="gallery.html" data-i18n="navGallery">Galeria</a></li>
+            <li><a href="index.html#kontakt" data-i18n="navContact">Kontakt</a></li>
+            <li>
+                <div class="lang-switch">
+                    <button class="lang-btn active" onclick="setLang('pl')">PL</button>
+                    <button class="lang-btn" onclick="setLang('en')">EN</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <div class="hero-breadcrumb"><a href="index.html" data-i18n="breadHome">Strona g&#322;&#243;wna</a> &nbsp;/&nbsp; <span data-i18n="breadPanic">Ataki paniki</span></div>
+        <h1 data-i18n="heroTitle">Moje podej&#347;cie do pracy<br>z atakami paniki</h1>
+        <p data-i18n="heroSub">Po&#322;&#261;czenie pracy psychologicznej i fizjologicznej w jeden zintegrowany system</p>
+    </div>
+</section>
+
+<!-- Intro -->
+<section class="intro-section">
+    <div class="intro-texture"></div>
+    <div class="intro-inner reveal">
+        <div class="section-label" data-i18n="introLabel">Wprowadzenie</div>
+        <h2 class="section-title" data-i18n="introTitle">Atak paniki rzadko pojawia si&#281; znik&#261;d</h2>
+        <p data-i18n="introP1">Atak paniki rzadko pojawia si&#281; &bdquo;znik&#261;d&rdquo;. W wi&#281;kszo&#347;ci przypadk&#243;w jest wynikiem z&#322;o&#380;onej interakcji proces&#243;w psychologicznych i fizjologicznych. Dlatego praca tylko z jedn&#261; stron&#261; problemu cz&#281;sto przynosi jedynie chwilow&#261; ulg&#281;.</p>
+        <p data-i18n="introP2">Moje osobiste podej&#347;cie &#322;&#261;czy w jeden zintegrowany system dwa obszary pracy &mdash; psychologiczny i fizjologiczny. Punktem wyj&#347;cia jest zrozumienie, &#380;e objawy fizyczne ataku paniki s&#261; reakcj&#261; cia&#322;a na g&#322;&#281;bszy wyzwalacz psychologiczny.</p>
+    </div>
+</section>
+
+<!-- Psychological work -->
+<section class="detail-section">
+    <div class="detail-inner reveal">
+        <div class="section-label" data-i18n="psyLabel">Praca psychologiczna</div>
+        <h2 class="section-title" data-i18n="psyTitle">Sk&#261;d bierze si&#281; wyzwalacz</h2>
+        <div class="section-divider"></div>
+        <p data-i18n="psyP1">Przez &bdquo;wyzwalacz&rdquo; nie rozumiem samej sytuacji, lecz wewn&#281;trzny mechanizm, kt&#243;ry powsta&#322; kiedy&#347; w odpowiedzi na przesz&#322;e do&#347;wiadczenie i od tamtej pory w&#322;&#261;cza si&#281; automatycznie w podobnych okoliczno&#347;ciach. Dlatego cz&#322;owiek mo&#380;e odczuwa&#263; silny strach w sytuacjach, kt&#243;re obiektywnie nie stanowi&#261; &#380;adnego zagro&#380;enia &mdash; cia&#322;o rozpoznaje podobie&#324;stwo do przesz&#322;ego do&#347;wiadczenia i automatycznie odtwarza znan&#261; sobie reakcj&#281;.</p>
+        <p data-i18n="psyP2">Praca zaczyna si&#281; od zidentyfikowania &#378;r&#243;d&#322;a tego mechanizmu. Razem z klientem stopniowo przechodzimy od zewn&#281;trznego przejawu problemu w stron&#281; jego g&#322;&#281;bszego &#378;r&#243;d&#322;a. Proces ten mo&#380;na por&#243;wna&#263; do obierania cebuli: warstwa po warstwie przechodzimy przez kolejne emocje i do&#347;wiadczenia, a&#380; widoczne stanie si&#281; pierwotne &#378;r&#243;d&#322;o l&#281;ku.</p>
+        <p data-i18n="psyP3">Gdy psychologiczny wyzwalacz zostanie zidentyfikowany i zneutralizowany, zmienia si&#281; emocjonalny zwi&#261;zek z pierwotnym wydarzeniem. Samo wspomnienie pozostaje cz&#281;&#347;ci&#261; historii &#380;ycia danej osoby, ale przestaje wywo&#322;ywa&#263; ten sam strach i wewn&#281;trzne napi&#281;cie. Poczucie zagro&#380;enia stopniowo ust&#281;puje miejsca wi&#281;kszemu poczuciu bezpiecze&#324;stwa i zrozumienia tego, co si&#281; dzieje.</p>
+    </div>
+</section>
+
+<!-- Photo break -->
+<div class="photo-feature">
+    <img src="photos/Trigger Point training  with Maksym Yeshchenko.jpeg" alt="Praca z punktami spustowymi">
+    <div class="photo-feature-overlay"></div>
+</div>
+
+<!-- Physiological work -->
+<section class="physio-section">
+    <div class="physio-texture"></div>
+    <div class="physio-inner reveal">
+        <div class="section-label" data-i18n="physioLabel">Praca fizjologiczna</div>
+        <h2 class="section-title" data-i18n="physioTitle">Cia&#322;o pami&#281;ta strach</h2>
+        <div class="section-divider"></div>
+        <p data-i18n="physioP1">Samo podej&#347;cie psychologiczne to jednak, moim zdaniem, za ma&#322;o. W okresach l&#281;ku cia&#322;o wykszta&#322;ca w&#322;asny fizjologiczny wzorzec reakcji &mdash; w mi&#281;&#347;niach i pow&#281;zi mog&#261; powstawa&#263; obszary chronicznego napi&#281;cia, tzw. punkty spustowe mi&#281;&#347;niowo-powi&#281;ziowe. Mog&#261; one utrwala&#263; wzorzec reakcji fizycznych, wp&#322;ywaj&#261;c na swobod&#281; oddychania, mi&#281;&#347;nie klatki piersiowej, kr&#261;&#380;enie i og&#243;ln&#261; reakcj&#281; organizmu na stres.</p>
+        <p data-i18n="physioP2">Ten fizjologiczny &#322;a&#324;cuch mo&#380;e przyczynia&#263; si&#281; do charakterystycznych objaw&#243;w ataku paniki: dusznos&#347;ci, przyspieszonego bicia serca, uczucia braku powietrza, zimnych pot&#243;w i innych objaw&#243;w fizycznych.</p>
+        <p data-i18n="physioP3">Dlatego drug&#261;, r&#243;wnie istotn&#261; cz&#281;&#347;ci&#261; mojej metody jest praca z wyzwalaczami fizjologicznymi. Po zaadresowaniu przyczyny psychologicznej pomagamy cia&#322;u wyj&#347;&#263; z utrwalonego stanu chronicznej gotowo&#347;ci na zagro&#380;enie. Praca z napi&#281;ciem mi&#281;&#347;niowym i punktami spustowymi pomaga przywr&#243;ci&#263; swobodniejszy oddech, zmniejszy&#263; nadmierne napi&#281;cie i przerwa&#263; znany fizjologiczny wzorzec towarzysz&#261;cy rozwojowi ataku paniki.</p>
+    </div>
+</section>
+
+<!-- Example -->
+<section class="example-section">
+    <div class="example-inner reveal">
+        <div class="section-label" data-i18n="exLabel">Przyk&#322;ad</div>
+        <h2 class="section-title" data-i18n="exTitle">L&#281;k przed lataniem</h2>
+        <div class="section-divider"></div>
+        <p data-i18n="exP1">Cz&#281;sty l&#281;k przed lataniem dobrze ilustruje to podej&#347;cie. Osoba mo&#380;e odczuwa&#263; silny niepok&#243;j ju&#380; przy wej&#347;ciu na pok&#322;ad samolotu: dusznos&#347;ci, zimne poty, &#322;zy i przyt&#322;aczaj&#261;ce poczucie paniki. Na pierwszy rzut oka mo&#380;na by pomy&#347;le&#263;, &#380;e problemem jest samo latanie. W moim podej&#347;ciu l&#281;k przed lataniem jest jednak wt&#243;rnym wyzwalaczem &mdash; wskazuje na g&#322;&#281;bsz&#261; przyczyn&#281;, kt&#243;ra mog&#322;a powsta&#263; znacznie wcze&#347;niej.</p>
+        <p data-i18n="exP2">Gdy to pierwotne &#378;r&#243;d&#322;o zostanie zidentyfikowane i przepracowane, l&#281;k przed lataniem zaczyna traci&#263; na intensywno&#347;ci emocjonalnej. Jednocze&#347;nie praca z wyzwalaczami fizjologicznymi pomaga cia&#322;u przesta&#263; automatycznie odtwarza&#263; dawn&#261; reakcj&#281;, dzi&#281;ki czemu znany wzorzec ataku paniki stopniowo przestaje si&#281; uruchamia&#263;.</p>
+        <p class="note" data-i18n="exNote">Wa&#380;ne jest, aby pami&#281;ta&#263;, &#380;e przy tym zintegrowanym podej&#347;ciu pierwsze zmiany mog&#261; czasem sta&#263; si&#281; zauwa&#380;alne stosunkowo szybko. Jednocze&#347;nie ka&#380;da osoba i ka&#380;da sytuacja s&#261; inne, dlatego tempo i efekt pracy zale&#380;&#261; od indywidualnych okoliczno&#347;ci i czynnik&#243;w le&#380;&#261;cych u podstaw reakcji panicznej.</p>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+    <div class="cta-texture"></div>
+    <div class="cta-inner reveal">
+        <h2 class="section-title" data-i18n="ctaTitle">Nie musisz dostosowywa&#263;<br>&#380;ycia do l&#281;ku</h2>
+        <p data-i18n="ctaSub">Je&#347;li &#380;yjesz z atakami paniki, l&#281;kiem przed lataniem lub inn&#261; form&#261; l&#281;ku, kt&#243;ra przejmuje kontrol&#281; nad Twoim cia&#322;em i &#380;yciem &mdash; zapraszam na konsultacj&#281;. Wsp&#243;lnie i spokojnie przyjrzymy si&#281; Twojej sytuacji oraz mechanizmom, kt&#243;re mog&#261; podtrzymywa&#263; reakcj&#281; paniczn&#261;.</p>
+        <a href="index.html#kontakt" class="cta-btn" data-i18n="ctaBtn">Um&#243;w konsultacj&#281;<svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-columns">
+        <div class="footer-col">
+            <div class="footer-col-title" data-i18n="footColGallery">Galeria i CV</div>
+            <a href="gallery.html" data-i18n="footGallery">Galeria</a>
+            <a href="cv.html">Curriculum Vitae</a>
+        </div>
+        <div class="footer-col">
+            <div class="footer-col-title" data-i18n="footColServices">Usługi</div>
+            <a href="panic-attacks.html">Ataki Paniki</a>
+            <a href="reconnection.html">Reconnection & Reconnective Healing</a>
+            <a href="gdv-camera.html">GDV Camera</a>
+            <a href="vedapulse.html">VedaPulse</a>
+        </div>
+        <div class="footer-col">
+            <div class="footer-col-title" data-i18n="footColLegal">Informacje prawne</div>
+            <a href="privacy-policy.html" data-i18n="footPrivacy">Polityka Prywatności</a>
+            <a href="terms.html" data-i18n="footTerms">Regulamin</a>
+        </div>
+    </div>
+    <div class="footer-bottom" data-i18n="footer">&copy; 2026 Body Mind Healing — Tamara Hofland. Wszelkie prawa zastrzeżone.</div>
+</footer>
+
+<script>
+// ═══════ TRANSLATIONS ═══════
+const T = {
+pl: {
+    promoText:'Tamara przyjmuje w Warszawie', promoDates:'20 listopada – 6 grudnia 2026', promoSlots:'ograniczona liczba miejsc', promoBtn:'Umów wizytę',
+    floatTitle:'Wizyta w Warszawie', floatDesc:'20 listopada – 6 grudnia 2026 · ograniczona liczba miejsc', floatBtn:'Umów wizytę',
+    navAbout:'O mnie', navServices:'Usługi', navTestimonials:'Opinie', navContact:'Kontakt', navGallery:'Galeria',
+    breadHome:'Strona główna', breadPanic:'Ataki paniki',
+    heroTitle:'Moje podejście do pracy<br>z atakami paniki',
+    heroSub:'Połączenie pracy psychologicznej i fizjologicznej w jeden zintegrowany system',
+    introLabel:'Wprowadzenie',
+    introTitle:'Atak paniki rzadko pojawia się znikąd',
+    introP1:'Atak paniki rzadko pojawia się „znikąd”. W większości przypadków jest wynikiem złożonej interakcji procesów psychologicznych i fizjologicznych. Dlatego praca tylko z jedną stroną problemu często przynosi jedynie chwilową ulgę.',
+    introP2:'Moje osobiste podejście łączy w jeden zintegrowany system dwa obszary pracy — psychologiczny i fizjologiczny. Punktem wyjścia jest zrozumienie, że objawy fizyczne ataku paniki są reakcją ciała na głębszy wyzwalacz psychologiczny.',
+    psyLabel:'Praca psychologiczna',
+    psyTitle:'Skąd bierze się wyzwalacz',
+    psyP1:'Przez „wyzwalacz” nie rozumiem samej sytuacji, lecz wewnętrzny mechanizm, który powstał kiedyś w odpowiedzi na przeszłe doświadczenie i od tamtej pory włącza się automatycznie w podobnych okolicznościach. Dlatego człowiek może odczuwać silny strach w sytuacjach, które obiektywnie nie stanowią żadnego zagrożenia — ciało rozpoznaje podobieństwo do przeszłego doświadczenia i automatycznie odtwarza znaną sobie reakcję.',
+    psyP2:'Praca zaczyna się od zidentyfikowania źródła tego mechanizmu. Razem z klientem stopniowo przechodzimy od zewnętrznego przejawu problemu w stronę jego głębszego źródła. Proces ten można porównać do obierania cebuli: warstwa po warstwie przechodzimy przez kolejne emocje i doświadczenia, aż widoczne stanie się pierwotne źródło lęku.',
+    psyP3:'Gdy psychologiczny wyzwalacz zostanie zidentyfikowany i zneutralizowany, zmienia się emocjonalny związek z pierwotnym wydarzeniem. Samo wspomnienie pozostaje częścią historii życia danej osoby, ale przestaje wywoływać ten sam strach i wewnętrzne napięcie. Poczucie zagrożenia stopniowo ustępuje miejsca większemu poczuciu bezpieczeństwa i zrozumienia tego, co się dzieje.',
+    physioLabel:'Praca fizjologiczna',
+    physioTitle:'Ciało pamięta strach',
+    physioP1:'Samo podejście psychologiczne to jednak, moim zdaniem, za mało. W okresach lęku ciało wykształca własny fizjologiczny wzorzec reakcji — w mięśniach i powęzi mogą powstawać obszary chronicznego napięcia, tzw. punkty spustowe mięśniowo-powięziowe. Mogą one utrwalać wzorzec reakcji fizycznych, wpływając na swobodę oddychania, mięśnie klatki piersiowej, krążenie i ogólną reakcję organizmu na stres.',
+    physioP2:'Ten fizjologiczny łańcuch może przyczyniać się do charakterystycznych objawów ataku paniki: dusznosci, przyspieszonego bicia serca, uczucia braku powietrza, zimnych potów i innych objawów fizycznych.',
+    physioP3:'Dlatego drugą, równie istotną częścią mojej metody jest praca z wyzwalaczami fizjologicznymi. Po zaadresowaniu przyczyny psychologicznej pomagamy ciału wyjść z utrwalonego stanu chronicznej gotowości na zagrożenie. Praca z napięciem mięśniowym i punktami spustowymi pomaga przywrócić swobodniejszy oddech, zmniejszyć nadmierne napięcie i przerwać znany fizjologiczny wzorzec towarzyszący rozwojowi ataku paniki.',
+    exLabel:'Przykład',
+    exTitle:'Lęk przed lataniem',
+    exP1:'Częsty lęk przed lataniem dobrze ilustruje to podejście. Osoba może odczuwać silny niepokój już przy wejściu na pokład samolotu: dusznosci, zimne poty, łzy i przytłaczające poczucie paniki. Na pierwszy rzut oka można by pomyśleć, że problemem jest samo latanie. W moim podejściu lęk przed lataniem jest jednak wtórnym wyzwalaczem — wskazuje na głębszą przyczynę, która mogła powstać znacznie wcześniej.',
+    exP2:'Gdy to pierwotne źródło zostanie zidentyfikowane i przepracowane, lęk przed lataniem zaczyna tracić na intensywności emocjonalnej. Jednocześnie praca z wyzwalaczami fizjologicznymi pomaga ciału przestać automatycznie odtwarzać dawną reakcję, dzięki czemu znany wzorzec ataku paniki stopniowo przestaje się uruchamiać.',
+    exNote:'Ważne jest, aby pamiętać, że przy tym zintegrowanym podejściu pierwsze zmiany mogą czasem stać się zauważalne stosunkowo szybko. Jednocześnie każda osoba i każda sytuacja są inne, dlatego tempo i efekt pracy zależą od indywidualnych okoliczności i czynników leżących u podstaw reakcji panicznej.',
+    ctaTitle:'Nie musisz dostosowywać<br>życia do lęku',
+    ctaSub:'Jeśli żyjesz z atakami paniki, lękiem przed lataniem lub inną formą lęku, która przejmuje kontrolę nad Twoim ciałem i życiem — zapraszam na konsultację. Wspólnie i spokojnie przyjrzymy się Twojej sytuacji oraz mechanizmom, które mogą podtrzymywać reakcję paniczną.',
+    ctaBtn:'Umów konsultację',
+    footGallery:'Galeria', footPrivacy:'Polityka Prywatności', footTerms:'Regulamin',
+    footColGallery:'Galeria i CV', footColServices:'Usługi', footColLegal:'Informacje prawne',
+    footer:'© 2026 Body Mind Healing — Tamara Hofland. Wszelkie prawa zastrzeżone.'
+},
+en: {
+    promoText:'Tamara is seeing clients in Warsaw', promoDates:'20 November – 6 December 2026', promoSlots:'limited number of slots', promoBtn:'Book a session',
+    floatTitle:'Visiting Warsaw', floatDesc:'20 November – 6 December 2026 · limited number of slots', floatBtn:'Book a session',
+    navAbout:'About', navServices:'Services', navTestimonials:'Testimonials', navContact:'Contact', navGallery:'Gallery',
+    breadHome:'Home', breadPanic:'Panic Attacks',
+    heroTitle:'My Approach to Working<br>with Panic Attacks',
+    heroSub:'Bringing psychological and physiological work together into one integrated system',
+    introLabel:'Introduction',
+    introTitle:'A panic attack rarely occurs "out of nowhere"',
+    introP1:'A panic attack rarely occurs "out of nowhere." In most cases, it is the result of a complex interaction between psychological and physiological processes. This is why addressing only one side of the problem often provides only temporary relief.',
+    introP2:'My personal approach is based on bringing together two areas of work — psychological and physiological — into one integrated system. At the heart of this approach is the understanding that the physical symptoms of a panic attack are the body’s response to a deeper psychological trigger.',
+    psyLabel:'Psychological work',
+    psyTitle:'Where the trigger comes from',
+    psyP1:'By "trigger," I do not mean the situation itself, but rather an internal mechanism that was once formed in response to a past experience and later begins to activate automatically in similar circumstances. This is why a person may experience intense fear in situations that objectively pose no real danger — the body recognizes similarities to a past experience and automatically reproduces its familiar response.',
+    psyP2:'The work begins with identifying the root cause of this mechanism. Together with the client, I gradually move from the outward manifestation of the problem towards its deeper source. This process can be compared to peeling an onion: layer by layer, we move through the more immediate emotions and experiences until the original source of the fear becomes visible.',
+    psyP3:'Once the psychological trigger has been identified and neutralized, the emotional connection to the original event changes. The memory itself remains part of the person’s life experience, but it no longer evokes the same fear and inner tension. The sense of danger is gradually replaced by a greater sense of safety and an understanding of what is happening.',
+    physioLabel:'Physiological work',
+    physioTitle:'The body remembers fear',
+    physioP1:'However, in my view, psychological work alone is not enough. During periods of fear, the body can develop its own physiological pattern of response. Areas of chronic tension may develop in the muscles and fascial system — myofascial trigger points. These can contribute to an established pattern of physical reactions, affecting ease of breathing, the muscles of the chest, circulation, and the body’s overall stress response.',
+    physioP2:'This physiological chain can contribute to the characteristic symptoms associated with a panic attack: shortness of breath, rapid heartbeat, a sensation of not getting enough air, cold sweats, and other physical symptoms.',
+    physioP3:'For this reason, the second essential part of my method involves working with physiological triggers. After addressing the psychological cause, we help the body move out of its established state of chronic readiness for danger. Working with muscular tension and myofascial trigger points can help restore freer breathing, reduce excessive tension, and interrupt the familiar physiological pattern associated with the development of a panic attack.',
+    exLabel:'Example',
+    exTitle:'A fear of flying',
+    exP1:'A common fear of flying provides a good illustration of this approach. A person may begin experiencing intense anxiety as soon as they board a plane: shortness of breath, cold sweats, tears, and an overwhelming sense of panic. At first glance, it may seem that flying itself is the problem. Within my approach, however, the fear of flying can be viewed as a secondary trigger — something that points towards a deeper cause that may have developed much earlier.',
+    exP2:'Once this original source has been identified and worked through, the fear of flying can begin to lose its emotional intensity. At the same time, working with physiological triggers helps the body stop automatically reproducing its previous response, so that the familiar pattern of a panic attack can gradually stop being activated.',
+    exNote:'It is important to note that, with this integrated approach, the first changes can sometimes become noticeable relatively quickly. At the same time, every person and every situation is different, so the pace and outcome of the work depend on the individual circumstances and the underlying factors contributing to the panic response.',
+    ctaTitle:'You don’t have to keep<br>adapting your life around fear',
+    ctaSub:'If you are living with panic attacks, a fear of flying, or other forms of anxiety that seem to take control of both your body and your life — I invite you to book a consultation. Together, we can calmly explore your situation and the mechanisms that may be maintaining the panic response.',
+    ctaBtn:'Book a consultation',
+    footGallery:'Gallery', footPrivacy:'Privacy Policy', footTerms:'Terms of Use',
+    footColGallery:'Gallery & CV', footColServices:'Services', footColLegal:'Legal',
+    footer:'© 2026 Body Mind Healing — Tamara Hofland. All rights reserved.'
+}
+};
+
+// ═══════ STATE ═══════
+let currentLang = 'pl';
+
+// ═══════ LANGUAGE ═══════
+function setLang(lang) {
+    currentLang = lang;
+    document.documentElement.className = 'lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent === lang.toUpperCase()));
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (T[lang][key]) el.innerHTML = T[lang][key];
+    });
+}
+
+// ═══════ INIT ═══════
+window.addEventListener('DOMContentLoaded', () => {
+    // Scroll reveal
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: .12 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+});
+</script>
+</body>
+</html>
