@@ -109,6 +109,17 @@
         .video-wrapper { position: relative; width: 100%; padding-bottom: 56.25%; margin: 2.5rem 0; background: rgba(0,0,0,.3); border: 1px solid rgba(200,150,62,.2); }
         .video-wrapper iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
+        /* -- Seminar Photos (mobile-first) -- */
+        .vp-photos { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin: 2.5rem 0 0; }
+        .vp-photo { margin: 0; }
+        .vp-photo img { width: 100%; height: auto; display: block; border: 1px solid rgba(200,150,62,.25); }
+        .vp-photo figcaption { font-size: .85rem; color: rgba(255,248,238,.55); margin-top: .6rem; line-height: 1.5; }
+        @media (min-width: 769px) {
+            .vp-photos { grid-template-columns: 1fr 1fr; }
+            .vp-photo--wide { grid-column: 1 / -1; }
+            .vp-photo:not(.vp-photo--wide) img { aspect-ratio: 3/4; object-fit: cover; }
+        }
+
         /* -- CTA -- */
         .cta-section { text-align: center; padding: 4rem 2rem 5rem; position: relative; }
         .cta-section .section-texture { opacity: .04; }
@@ -239,6 +250,30 @@ function dismissPromo() {
     </div>
 </section>
 
+<!-- Seminar Photos -->
+<section class="content-section">
+    <div class="section-texture"></div>
+    <div class="content-inner">
+        <div class="section-label reveal" data-i18n="vpPhotosLabel">Galeria</div>
+        <h2 class="section-title reveal" data-i18n="vpPhotosTitle">Seminarium VedaPulse, Belgrad 2026</h2>
+        <div class="section-divider reveal"></div>
+        <div class="vp-photos reveal">
+            <figure class="vp-photo vp-photo--wide">
+                <img src="photos/vedapulse-belgrade-2026.jpeg" alt="Tamara na seminarium z okazji 20-lecia VedaPulse w Belgradzie" loading="lazy">
+                <figcaption data-i18n="vpPhoto1">Tamara na 20-leciu VedaPulse, Belgrad 2026</figcaption>
+            </figure>
+            <figure class="vp-photo">
+                <img src="photos/oleg-sorokin-certificate.jpeg" alt="Tamara z Olegiem Sorokinem podczas wręczenia certyfikatu VedaPulse" loading="lazy">
+                <figcaption data-i18n="vpPhoto2">Z Olegiem Sorokinem, założycielem VedaPulse &mdash; wręczenie certyfikatu</figcaption>
+            </figure>
+            <figure class="vp-photo">
+                <img src="photos/oleg-sorokin-lobby.jpeg" alt="Tamara z Olegiem Sorokinem" loading="lazy">
+                <figcaption data-i18n="vpPhoto3">Z Olegiem Sorokinem, założycielem VedaPulse</figcaption>
+            </figure>
+        </div>
+    </div>
+</section>
+
 <!-- Video Section -->
 <section class="content-section">
     <div class="section-texture"></div>
@@ -315,6 +350,11 @@ pl: {
     vpItem4:'Stan funkcjonalny r\u00f3\u017cnych uk\u0142ad\u00f3w cia\u0142a',
     vpItem5:'Og\u00f3lny bilans energetyczny i witalno\u015b\u0107',
     vpShowOutro:'Metoda \u0142\u0105czy wsp\u00f3\u0142czesn\u0105 analiz\u0119 komputerow\u0105 z zasadami tradycyjnej medycyny ajurwedyjskiej, pomagaj\u0105c stworzy\u0107 pe\u0142niejszy obraz aktualnej kondycji fizycznej i energetycznej. Informacje te mog\u0105 wspiera\u0107 bardziej zindywidualizowane i holistyczne podej\u015bcie do terapii.',
+    vpPhotosLabel:'Galeria',
+    vpPhotosTitle:'Seminarium VedaPulse, Belgrad 2026',
+    vpPhoto1:'Tamara na 20-leciu VedaPulse, Belgrad 2026',
+    vpPhoto2:'Z Olegiem Sorokinem, założycielem VedaPulse — wręczenie certyfikatu',
+    vpPhoto3:'Z Olegiem Sorokinem, założycielem VedaPulse',
     vpVideoLabel:'Prezentacja',
     vpVideoTitle:'Demonstracja VedaPulse',
     vpPriceLabel:'Cena',
@@ -343,6 +383,11 @@ en: {
     vpItem4:'The functional state of different body systems',
     vpItem5:'Overall energy balance and vitality',
     vpShowOutro:'The method combines modern computer analysis with principles from traditional Ayurvedic medicine, helping to create a clearer picture of your current physical and energetic condition. This information can support a more individualized and holistic approach to therapy.',
+    vpPhotosLabel:'Gallery',
+    vpPhotosTitle:'VedaPulse Seminar, Belgrade 2026',
+    vpPhoto1:'Tamara at the VedaPulse 20th Anniversary Seminar, Belgrade 2026',
+    vpPhoto2:'With Oleg Sorokin, the founder of VedaPulse — certificate ceremony',
+    vpPhoto3:'With Oleg Sorokin, the founder of VedaPulse',
     vpVideoLabel:'Presentation',
     vpVideoTitle:'VedaPulse Demonstration',
     vpPriceLabel:'Price',
